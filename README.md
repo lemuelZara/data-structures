@@ -1,16 +1,32 @@
 # Data Structures + Algorithms
 
-## Big O
+## What is Big-O Notation?
 
-Big O says which function, algorithm or code is best.
+This notations focuses on finding the best and worst case that our algorithm takes to execute.
 
-Big O is used to describe how efficient we can run our code.
+> *We're always looking at the worst case scenario.*
 
-*We're always looking at the worst case scenario.*
+We talk about Big-O when we want to understand:
+- how long[^1] an algorithm takes to execute (Time Complexity);
+- how much memory is used by an algorithm (Space Complexity);
+- says which function, algorithm or code is best;
+- describe how efficient we can run our code;
 
-Keep this is mind, Big O doesn't measure things in seconds. Instead, we're focusing on **how quickly our runtime grows**.
+[^1]: The "running time" when using Big-O is not directly linked to the time we know (seconds, milliseconds, microseconds, etc.). Instead we can understand the **time** as the number of operations or steps neeeded to complete a problem of size *n*.
 
-**Rules**
+> *Keep this is mind, Big-O doesn't measure things in seconds. Instead, we're focusing on **how quickly our runtime grows**.*
+
+Good to remember:
+- What can cause time in a function?
+  - operations (+, -, *, /)
+  - comparisons (<, >, ==, !=)
+  - looping (for, while)
+  - outside Function call (functionOutOfScope())
+- What causes Space complexity?
+  - variables
+  - data Structures
+  - function Call
+  - allocations
 
 - Worst Case: only cares about the worst case.
 	- O(N) > O(1)
@@ -186,5 +202,23 @@ function anotherFunChallenge(input) {
 
 // Big O(4 + 7N) => Big O(N)
 ```
+
+## Simplifying Big O
+
+### Drop the constants
+
+Since Big-O is concerned with how quickly our runtime grows, the first rule that you want to remember is to **drop any constants** when you analyze an algorithm:
+
+- $O(4 * N) = O(N)$
+- $O(512 * N) = O(N)$
+- $O(N / 3) = O((1/3) * N): O(N)$
+- $O(5 * N * N) = O(N)$
+
+### Different inputs should have different variables
+
+If an algorithm receives different input parameters (e.g., $f(A, B)$), a different calculation is required for each type of situation:
+
+- $O(f(A + B))$: `for` steps in order
+- $O(f(A * B))$: `for` nested steps
 
 In progress... 🏗

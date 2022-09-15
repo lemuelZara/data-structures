@@ -1,0 +1,16 @@
+O que é a notação BigO?
+    - Falamos em BigO quando queremos entender:
+        - quanto tempo um algoritmo leva para ser executado (Time Complexity);
+        - quanta memória é usada por esse algoritmo (Space Complexity);
+    - Essa notação foca em encontrar o melhor e o pior tempo médio de execução de um algoritmo.
+    - Big O says which function, algorithm or code is best.
+    - Big O is used to describe how efficient we can run our code.
+    - We're always looking at the worst case scenario.
+
+    - Ao usar a notação, devemos ter em mente que:
+        - O tempo de execução não é equivalente ao tempo que conhecemos (segundos, milissegundos, microssegundos, etc) Já que esse
+        "tempo" pode ser diferentes se levarmos em conta aspectos como processador, linguagem, ambiente de execução, entre ouras coisas
+        - O tempo de execução é entendido como o número de operações ou etapas necessárias para concluir um problema de tamanho N.
+
+    - Keep this is mind, Big O doesn't measure things in seconds. Instead, we're focusing on **how quickly our runtime grows**.
+
