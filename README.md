@@ -1,10 +1,20 @@
 # Data Structures + Algorithms
 
+<img src="./bigo.png" width="600">
+
 ## What is Big-O Notation?
+
+1. [O(1)](#o1---constant-time)
+2. [O(log N)](#olog-n---logarithmic-time)
+3. [O(N)](#on---linear-time)
+4. [O(n log(N))](#on-logn---log-linear-time)
+5. [O(N^2)](#on2---quadratic-time)
+6. [O(2^N)](#o2n---exponential-time)
+7. [O(N!)](#on---factorial-time)
 
 This notations focuses on finding the best and worst case that our algorithm takes to execute.
 
-> *We're always looking at the worst case scenario.*
+> 📝 *We're always looking at the worst case scenario.*
 
 We talk about Big-O when we want to understand:
 - how long[^1] an algorithm takes to execute (Time Complexity);
@@ -14,146 +24,240 @@ We talk about Big-O when we want to understand:
 
 [^1]: The "running time" when using Big-O is not directly linked to the time we know (seconds, milliseconds, microseconds, etc.). Instead we can understand the **time** as the number of operations or steps neeeded to complete a problem of size *n*.
 
-> *Keep this is mind, Big-O doesn't measure things in seconds. Instead, we're focusing on **how quickly our runtime grows**.*
-
-Good to remember:
-- What can cause time in a function?
-  - operations (+, -, *, /)
-  - comparisons (<, >, ==, !=)
-  - looping (for, while)
-  - outside Function call (functionOutOfScope())
-- What causes Space complexity?
-  - variables
-  - data Structures
-  - function Call
-  - allocations
-
-- Worst Case: only cares about the worst case.
-	- O(N) > O(1)
-
-- Remove Constants: drop the constants.
-	- O(1 + N/2 + 100) => O(N)
-	- O(2N) => O(N)
-
-- Different terms for inputs
-	- ```javascript
-		function x(nums, nums2) { 
-			// loop for nums
-
-			// loop for nums2
-		}
-
-		// O(nums + nums2) => O(A + B)
-	  ```
-	- ```javascript
-		function x(nums, nums2) { 
-			// loop for nums
-			// loop for nums2 inside nums
-		}
-
-		// O(nums * nums2) => O(A * B)
-	  ```
-
-- Drop Non Dominants: we care about the most important term
-	- O(N + N^2) => O(N^2)
-	- O(N^2 + 3N + 100 + N/2) => O(N^2)
+> 📝 *Keep this is mind, Big-O doesn't measure things in seconds. Instead, we're focusing on **how quickly our runtime grows**.*
 
 <br>
 
-<img src="./bigo.png">
+### Good to remember 💡
+
+| What can cause time in a function?           | What causes Space complexity? |
+| :------------------------------------------- | :---------------------------- |
+| operations (+, -, *, /)                      | variables                     |
+| comparisons (<, >, ==, !=)                   | data structures               |
+| looping (for, while)                         | function call                 |
+| outside function call (functionOutOfScope()) | allocations                   |
 
 <br>
 
-### Constants - O(1)
+### $O(1)$ - Constant time
 
-no loops.
+It takes a constant time to run an algorithm, regardless of the size of the input:
 
-```go
-package main
+```javascript
+function findFirstIndex(n) {
+	const firstIndex = n[0];
 
-import "fmt"
-
-func compressFirstAndSecondBox(boxes []string) {
-	fmt.Println(arr[0]) // O(1)
-	fmt.Println(arr[1]) // O(2)
-}
-
-func main() {
-	boxes := []string{"a", "b", "c", "d", "e"}
-
-	compressFirstBox(boxes) // O(2) - No matter how big this the number of boxes are, we're only doing one.
+	return firstIndex;
 }
 ```
 
-### Logarithmic - O(log N)
+In programming, a lot of operations are constant. Here are some examples:
 
-usually searching algorithms have log N if they are sorted (Binary Search).
+- math operations.
+- accessing an array via the index.
+- accessing a hash via the key.
+- pushing and popping on a stack.
+- insertion and removal from a queue.
+- returning a value from a function.
 
-### Linear - O(N)
 
-for loops, while loops through N items.
+<br>
 
-```go
-package main
+### $O(log N)$ - Logarithmic time
 
-import "fmt"
+Usually found in tree data structures and in binary search algorithms.
+The key point of this notation is: you don't have to go through an entire list to find a certain value, instead, we can split the list in two until we find what we need:
 
-func printValues(arr []string) {
-	for i := 0; i < len(arr); i++ {
-		fmt.Println(arr[i])
+```javascript
+// the list is already sorted
+function binarySearch(list, value) {
+	if (list.length === 1) {
+		return list[0] === value;
+	}
+
+	if (list.length === 0) {
+		return false;
+	}
+
+	const mid = Math.floor(list.length / 2);
+
+	if (value < list[mid]) {
+		return binarySearch(list.splice(0, mid), value);
+	} else {
+		return binarySearch(list.splice(mid, list.length), value);
 	}
 }
-
-func main() {
-	arr := []string{"a", "b", "c", "d", "e"} // and continue...
-
-	printValues(arr) // O(arr) - It takes linear time do print values
-}
 ```
-
-### Log Linear - O(N log(N))
-
-usually sorting operations.
-
-### Quadratic - O(N ^ 2)
-
-every element in a collection needs to be compared to every other element (Two nested loops).
-
-when you see loops that are nested, we use multiplication.
-
-```go
-package main
-
-import "fmt"
-
-func logAllPairsOfArray(arr []string) {
-	for i := 0; i < len(arr); i++ {
-		for j := 0; j < len(arr); j++ {
-			fmt.Println(arr[i], arr[j])
-		}
-	}
-}
-
-func main() {
-	arr := []string{"a", "b", "c", "d", "e"}
-
-	logAllPairsOfArray(arr)
-}
-```
-
-### Exponential - O(2 ^ N)
-
-recursive algorithms that solves a problem of size N.
-
-### Factorial - O(N!)
-
-you are adding a loop for every element.
 
 <br>
 
-### Big O Exercises
+### $O(N)$ - Linear time
 
-#### Exercise 1
+The run-time increases at the same pace as the input.
+
+In programming, one of the most common linear-time operations is traversing an array:
+
+```javascript
+function printAllValues(n) {
+	for (let i = 0; i < n.length; i++) {
+		console.log(i);
+	}
+}
+```
+
+> *In JavaScript, methods like `forEach`, `map`, and `reduce` run through the entire collection of data, from start to finish.*
+
+<br>
+
+### $O(N * log{N})$ - Log Linear time
+
+The $O(N * log{N})$ complexity happens when we have $log{N}$ interactions, but for every interaction, we traverse the whole list with an additional N complexity:
+
+```javascript
+function nLogNFunc(n) {
+  for (let i = 1; i < n.length; i *= 2) {
+    for (let j = 0; j < n.length; j++) {
+      console.log(i)
+    }
+  }
+}
+
+nLogNFunc(Array(4).fill(0)); // O(4 * log4) = O(4 * 2) = O(8)
+nLogNFunc(Array(8).fill(0)); // O(8 * log8) = O(8 * 3) = O(24)
+```
+
+<br>
+
+### $O(N^2)$ - Quadratic time
+
+An algorithm is "quadratic" when for every item of the input, the whole input is traversed. It happens when we have nested loops:
+
+```javascript
+function countOperations(n) {
+	let operations = 0;
+
+	for (let i = 0; i < n; i++) {
+		for (let j = 0; j < n; j++) {
+			operations++;
+		}
+	}
+
+	return operations;
+}
+```
+
+In programming, many of the more basic sorting algorithms have a worst-case run time of $O(N^2)$:
+
+- Bubble Sort.
+- Insertion Sort.
+- Selection Sort.
+
+<br>
+
+### $O(2^N)$ - Exponential time
+
+Means that the calculations performed by an algorithm double every time as the input grows:
+
+```javascript
+function powerset(n = '') {
+  const array = Array.from(n);
+  const base = [''];
+
+  const results = array.reduce((previous, element) => {
+    const previousPlusElement = previous.map(el => {
+      return `${el}${element}`;
+    });
+    return previous.concat(previousPlusElement);
+  }, base);
+
+  return results;
+}
+
+powerset('') // =>  ['']
+powerset('a') // => ['', 'a']
+powerset('ab') // => ['', 'a', 'b', 'ab']
+```
+
+Examples of exponential runtime algorithms:
+
+- Power Set: finding all the subsets on a set.
+- Fibonacci.
+- Travelling salesman problem using dynamic programming.
+
+> :warning: *You should avoid functions with exponential running times (if possible) since they don’t scale well. The time it takes to process the output doubles with every additional input size.*
+
+<br>
+
+### $O(N!)$ - Factorial time
+
+It means that we're adding a nested loop for every input that we have:
+
+```javascript
+function f(n) {
+  if (n === 0) {
+    return;
+  }
+
+  for (let i = 0; i < n; i++) {
+    f(n - 1);
+  }
+}
+ 
+f(3);
+```
+
+<img src="bigo-o-factorial.png" />
+
+Examples of $O(N!)$ factorial runtime algorithms:
+
+- Permutations of a string.
+- Solving the traveling salesman problem with a brute-force search.
+
+<br>
+
+## Simplifying Big O
+
+### Drop the constants
+
+Since Big-O is concerned with how quickly our runtime grows, the first rule that you want to remember is to **drop any constants** when you analyze an algorithm:
+
+- $O(4 * N) = O(N)$
+- $O(512 * N) = O(N)$
+- $O(N / 3) = O((1/3) * N): O(N)$
+- $O(5 * N * N) = O(N)$
+
+### Different inputs should have different variables
+
+If an algorithm receives different input parameters (e.g., $f(A, B)$), a different calculation is required for each type of situation:
+
+- $O(f(A + B))$: `for` steps in order:
+  ```javascript
+  for (A) {
+	...
+  }
+
+  for (B) {
+	...
+  }
+  ```
+- $O(f(A * B))$: `for` nested steps:
+  ```javascript
+  for (A) {
+	for (B) {
+		...
+	}
+  }
+  ```
+
+### Drop the non-dominant terms
+
+If an algorithm takes $O(f(N) + g(N))$ steps and the function $f(N)$ is bigger than $g(N)$, algorithm’s performance can be simplified to $O(f(N))$:
+
+- $O(N^2 + N) = O(N^2)$
+- $O(N + 500 + N^3 + N^2) = O(N^3)$, because $O(N^3)$ it's the worst
+- $O(N! + N^{50} + 2^N) = O(N!)$ 
+
+### Big O Examples
 
 ```javascript
 // What is the Big O of the below function?
@@ -174,8 +278,6 @@ function funChallenge(input) {
 
 // Big O(3 + 4N) => Big O(N)
 ```
-
-#### Exercise 2
 
 ```javascript
 // What is the Big O of the below function?
@@ -202,23 +304,5 @@ function anotherFunChallenge(input) {
 
 // Big O(4 + 7N) => Big O(N)
 ```
-
-## Simplifying Big O
-
-### Drop the constants
-
-Since Big-O is concerned with how quickly our runtime grows, the first rule that you want to remember is to **drop any constants** when you analyze an algorithm:
-
-- $O(4 * N) = O(N)$
-- $O(512 * N) = O(N)$
-- $O(N / 3) = O((1/3) * N): O(N)$
-- $O(5 * N * N) = O(N)$
-
-### Different inputs should have different variables
-
-If an algorithm receives different input parameters (e.g., $f(A, B)$), a different calculation is required for each type of situation:
-
-- $O(f(A + B))$: `for` steps in order
-- $O(f(A * B))$: `for` nested steps
 
 In progress... 🏗

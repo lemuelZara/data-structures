@@ -14,3 +14,11 @@ O que é a notação BigO?
 
     - Keep this is mind, Big O doesn't measure things in seconds. Instead, we're focusing on **how quickly our runtime grows**.
 
+o log n
+ - normalmente encontrada em estrutura de dados do tipo árvore e em algoritmos de busca binária.
+ - o ponto chave dessa notação é que não é necessário percorrer toda uma lista para encontrar
+ determinado valor, em vez disso, podemos dividir a lista em 2 até encontrar o que precisamos.
+
+non-dominant terms
+ - removemos termos menores dentro do escopo do algoritmo que estamos lidando,
+ - ficamos só com aquele que é o pior dentre todos
