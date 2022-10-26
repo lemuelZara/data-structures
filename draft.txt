@@ -22,3 +22,27 @@ o log n
 non-dominant terms
  - removemos termos menores dentro do escopo do algoritmo que estamos lidando,
  - ficamos só com aquele que é o pior dentre todos
+
+Data Structures
+- Arrays
+- Stacks
+- Queues
+- Linked Lists
+- Trees
+- Tries
+- Graphs
+- Hash Tables
+
+Algorithms
+- Sorting
+- Dynamic Programming
+- BFS + DFS (Searching)
+- Recursion
+
+Operations
+- Insertion
+- Deletion
+- Traversal
+- Searching
+- Sorting
+- Access
